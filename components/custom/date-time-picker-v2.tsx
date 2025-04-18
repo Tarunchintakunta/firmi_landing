@@ -41,13 +41,14 @@ export default function DateTimePicker({
   containerClassName,
   dateType = "date_time",
 }: DateTimePickerProps) {
-  const initialDate = new Date(value);
+  // Use useMemo to create initialDateValue to prevent recreation on every render
+  const initialDateValue = React.useMemo(() => new Date(value), [value]);
 
   const [time, setTime] = React.useState<string>(
-    dateType !== "date" ? format(initialDate, "HH:mm") : ""
+    dateType !== "date" ? format(initialDateValue, "HH:mm") : ""
   );
-  const [date, setDate] = React.useState<Date | undefined>(
-    dateType !== "time" ? initialDate : undefined
+  const [date, setDate] = React.useState<string | undefined>(
+    dateType !== "time" ? format(initialDateValue, "yyyy-MM-dd") : undefined
   );
 
   const handlePlaceholder = () => {
@@ -59,12 +60,12 @@ export default function DateTimePicker({
       : "Select Date and Time";
   };
 
-  const formatDateTime = (date: Date | undefined, time: string) => {
+  const formatDateTime = (date: string | undefined, time: string) => {
     if (!date && !time) return handlePlaceholder();
-    if (dateType === "date" && date) return format(date, "PPP");
+    if (dateType === "date" && date) return date;
     if (dateType === "time" && time) return time;
     if (dateType === "date_time" && date && time)
-      return `${format(date, "PPP")} ${time}`;
+      return `${date} ${time}`;
     return handlePlaceholder();
   };
 
@@ -74,7 +75,7 @@ export default function DateTimePicker({
         const [hours, minutes] = time.split(":");
         newDate.setHours(parseInt(hours), parseInt(minutes));
       }
-      setDate(newDate);
+      setDate(format(newDate, "yyyy-MM-dd"));
       onChange(newDate.getTime());
     } else if (dateType === "time" && time) {
       onChange(parse(time, "HH:mm", new Date()).getTime());
@@ -89,23 +90,28 @@ export default function DateTimePicker({
 
     if (newTime) {
       if (dateType === "date_time" && date) {
-        const newDateTime = new Date(date);
-        const [hours, minutes] = newTime.split(":");
-        newDateTime.setHours(parseInt(hours), parseInt(minutes));
+        const newDateTime = parse(`${date}T${newTime}`, "yyyy-MM-dd'T'HH:mm", new Date());
         onChange(newDateTime.getTime());
       } else onChange(parse(newTime, "HH:mm", new Date()).getTime());
-    } else if (dateType === "date" && date) onChange(date.getTime());
+    } else if (dateType === "date" && date) onChange(parse(date, "yyyy-MM-dd", new Date()).getTime());
     else onChange(null);
   };
 
   React.useEffect(() => {
-    if (dateType === "date") setDate(date || new Date());
+    if (initialDateValue) {
+      setDate(format(initialDateValue, 'yyyy-MM-dd'));
+      setTime(format(initialDateValue, 'HH:mm'));
+    }
+  }, [initialDateValue]);
+
+  React.useEffect(() => {
+    if (dateType === "date") setDate(date || format(new Date(), "yyyy-MM-dd"));
     else if (dateType === "time") setTime(time || format(new Date(), "HH:mm"));
     else {
-      setDate(date || new Date());
-      setTime(time || format(initialDate, "HH:mm"));
+      setDate(date || format(initialDateValue, "yyyy-MM-dd"));
+      setTime(time || format(initialDateValue, "HH:mm"));
     }
-  }, [dateType]);
+  }, [dateType, date, time, initialDateValue]);
 
   return (
     <div className={cn("space-y-2", containerClassName)}>
@@ -132,7 +138,7 @@ export default function DateTimePicker({
           {dateType !== "time" ? (
             <Calendar
               mode="single"
-              selected={date}
+              selected={date ? parse(date, "yyyy-MM-dd", new Date()) : undefined}
               onSelect={handleDateChange}
               initialFocus
               className={calendarClassName}

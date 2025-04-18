@@ -1,8 +1,8 @@
+
 'use client';
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import Button3D from './Button3D';
 
 const PresentationSection = () => {
   return (
@@ -19,8 +19,8 @@ const PresentationSection = () => {
             <h2 className="text-4xl md:text-5xl font-rooftop text-[#415d80] mb-6">
               Presentation-Ready Outputs
             </h2>
-            <p className="text-xl text-tertiary mb-8">
-              Accelerate time to value by formatting analyses into tailor-made deliverables.
+            <p className="text-lg text-tertiary mb-8">
+              Let&apos;s accelerate time to value by formatting analyses into tailor-made deliverables.
             </p>
 
             <h3 className="text-xl font-medium text-tertiary mb-5">
@@ -95,7 +95,7 @@ const PresentationSection = () => {
                         <path fillRule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z" clipRule="evenodd"></path>
                       </svg>
                     </div>
-                    <span className="text-sm font-medium text-gray-800">TechForge's Acquisition of CloudMatrix</span>
+                    <span className="text-sm font-medium text-gray-800">TechForge&apos;s Acquisition of CloudMatrix</span>
                   </div>
                 </div>
 

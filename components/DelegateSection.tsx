@@ -20,8 +20,7 @@ const DelegateSection = () => {
               Delegate High Frequency Tasks
             </h2>
             <p className="text-lg text-tertiary mb-8">
-              Firmi agents break down tasks into customizable plans with 
-              traceable steps. Automate your team's analytical legwork at scale.
+              Firmi unifies your internal files, external data, and trusted sources into a single searchable plane, enabling every analysis to be as comprehensive as possible.
             </p>
 
             <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100">
@@ -111,10 +110,8 @@ const DelegateSection = () => {
             <h2 className="text-3xl md:text-4xl font-rooftop text-[#415d80] mb-6">
               Reason over All of Your Data
             </h2>
-            <p className="text-lg text-tertiary mb-8">
-              Firmi unifies your internal files, external data, and trusted
-              sources into a single searchable plane, enabling every analysis
-              to be as comprehensive as possible.
+            <p className="text-lg text-gray-600 mb-8">
+              Don&apos;t waste time on repetitive tasks. Let&apos;s handle them for you.
             </p>
 
             <div className="bg-blue-50 rounded-xl p-6 relative overflow-hidden">

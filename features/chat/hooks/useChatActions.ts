@@ -20,7 +20,8 @@ export const useChatActions = (
   mentionedCompanies: string[],
   updateUiState: (updates: any) => void,
   setInput: (input: string) => void,
-  updateMentionState: (updates: any) => void
+  updateMentionState: (updates: any) => void,
+  email: string
 ) => {
   // API Hooks
   const { data: chats, isLoading: chatsLoading } = useChats();
@@ -29,7 +30,7 @@ export const useChatActions = (
   );
   const { mutateAsync: saveChatMutation } = useSaveChatMutation();
   const { mutateAsync: queryLlm } = useQueryLlmMutation();
-  const { data: files, isLoading: filesLoading } = useFiles();
+  const { data: files, isLoading: filesLoading } = useFiles(email);
   const { mutateAsync: uploadFile } = useUploadFileMutation();
   const { mutateAsync: downloadFile } = useDownloadFileMutation();
 

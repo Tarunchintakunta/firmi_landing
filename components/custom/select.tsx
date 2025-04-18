@@ -3,7 +3,7 @@ import React, { Dispatch, ReactNode, SetStateAction, memo } from "react";
 import { type ClassValue } from "clsx";
 
 import { cn } from "@/lib/utils";
-import { OptionsInterface } from "utility";
+import { OptionsInterface } from "@/utils/interfaces";
 
 import {
   Select,

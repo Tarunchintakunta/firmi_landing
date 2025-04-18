@@ -45,7 +45,7 @@ const SearchSection = () => {
     }, 3000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [items.length]);
 
   const handleSearch = () => {
     // Add your search functionality here

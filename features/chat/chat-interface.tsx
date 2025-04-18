@@ -12,10 +12,10 @@ import { useChatState, useChatActions } from "./hooks";
 import { useSession } from "next-auth/react";
 
 export interface ChatInterfaceProps {
-  tickername: string;
+  tickername?: string;
 }
 
-export function ChatInterface({ tickername }: ChatInterfaceProps) {
+export function ChatInterface({ tickername = "" }: ChatInterfaceProps) {
   const { data: session } = useSession();
   const {
     input,
@@ -44,13 +44,14 @@ export function ChatInterface({ tickername }: ChatInterfaceProps) {
     handleFileDownload,
   } = useChatActions(
     session?.user?.email ?? "",
-    tickername,
+    tickername ?? "",
     input,
     currentChat,
     mentionState.mentionedCompanies,
     updateUiState,
     setInput,
-    updateMentionState
+    updateMentionState,
+    session?.user?.email ?? ""
   );
 
   // Handle input change

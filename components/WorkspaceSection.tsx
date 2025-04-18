@@ -258,7 +258,7 @@ const WorkspaceSection = () => {
                         Database, application & file security software
                       </td>
                       <td className="px-6 py-4 text-sm text-gray-900 max-w-md truncate">
-                        Largest infosec take-private to date, eclipsing Quant's pickup of Luma Tech in 2017
+                        Largest infosec take-private to date, eclipsing Quant&apos;s pickup of Luma Tech in 2017
                       </td>
                     </tr>
                   </tbody>

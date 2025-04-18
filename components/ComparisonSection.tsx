@@ -2,7 +2,6 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, useInView } from 'framer-motion';
-import Button from './Button';
 
 const ComparisonSection = () => {
   const [currentCardIndex, setCurrentCardIndex] = useState(0);
@@ -115,7 +114,7 @@ const ComparisonSection = () => {
     }, 8000);
 
     return () => clearInterval(timer);
-  }, []);
+  }, [comparisonCards.length]);
 
   return (
     <section className="py-20 bg-white">
